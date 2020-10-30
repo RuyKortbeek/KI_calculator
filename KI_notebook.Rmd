@@ -1,0 +1,15 @@
+---
+title: "KI calculator"
+output: html_notebook
+---
+# Insert your retetion time below in minutes or in seconds ("my.rt") and run the code. The KI is printed
+```{r}
+my.rt.minutes = 24.345
+
+my.rt = my.rt.minutes*60
+
+source("script.R")
+print(KI)
+```
+
+
