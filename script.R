@@ -33,7 +33,8 @@ ggplot(alkanes,aes(x = carbons,  y = RT))+
 ###########################################################
 
 # Measured retention time of your compound of interest
-my.rt = 1017
+# This is now done using the KI_notebook.Rmd file! 
+# my.rt = 1017
 
 
 # Logical statement to determine the retention time interval of your compound
