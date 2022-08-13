@@ -1,11 +1,12 @@
 library(shiny)
+library(tidyverse)
 
 
 ########################################
 # Give Retention time values (seconds) 
 # of the alkane series 
 ########################################
-alkanes = data.frame(
+alkanes <- data.frame(
 RT = 
 c(
 c8 <- 523.5, # n-octane
@@ -23,12 +24,6 @@ c19 <- 1916.8 # n-nonadecane
 ),
 carbons = c(8:19)
 )
-
-# Plot retention time progression of the alkane series
-ggplot(alkanes,aes(x = carbons,  y = RT))+
-  geom_point()+
-  geom_line()
-
 
 ###########################################################
 # Set the N-1 / N+1 points from your compound of interest #
@@ -124,6 +119,40 @@ KI.variables =
 }
 
 
+
+
+#############################################
+# Calculate KI using van der Dool's formula #
+#############################################
+KI = round((100 * KI.variables$N)+100*((my.rt - KI.variables$RT1)/(KI.variables$RT2 - KI.variables$RT1)))
+
+KI.fun <- function(x){
+  
+  (100 * KI.variables$N)+100*((x - KI.variables$RT1)/(KI.variables$RT2 - KI.variables$RT1))
+  
+}
+
+
+#################
+# Alkanes to KI #
+#################
+
+alkanes_2 <- alkanes %>% 
+  mutate(KI = round(sapply(RT, KI.fun))) %>% 
+  mutate(carbons = paste0("C", carbons))
+# Plot retention time progression of the alkane series
+ggplot()+
+  stat_function(data = data.frame(x = 1:2000), mapping = aes(x = x), fun = KI.fun)+
+  geom_point(aes(x = alkanes_2$RT, y = alkanes_2$KI))+
+  geom_text(aes(x = alkanes_2$RT, y = alkanes_2$KI+50, label = alkanes_2$carbons), color = "blue")
+
+
+
+
+
+
+
+
 #############
 # Shiny app #
 #############
@@ -135,11 +164,4 @@ ui <- fluidPage(
   )
 )
 server <- function(input, output) {}
-
-
-#############################################
-# Calculate KI using van der Dool's formula #
-#############################################
-KI = round((100 * KI.variables$N)+100*((my.rt - KI.variables$RT1)/(KI.variables$RT2 - KI.variables$RT1)))
-
 shinyApp(ui = ui, server = server)
