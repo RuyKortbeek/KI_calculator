@@ -43,3 +43,15 @@ compounds_of_interest %>%
 # Write .xlsx file
 write.xlsx(compounds_of_interest_with_KI,
            file =  "output_compounds_with_KI.xlsx")
+
+
+############################################
+# Extra - Plot alkenes series vs. their KI #
+############################################
+
+alkanes %>% 
+  mutate(KI_of_alkane = as.numeric(lapply(RT_seconds, fun.KI))) %>%
+  drop_na(KI_of_alkane) %>%
+  ggplot(aes(x = carbons, y = KI_of_alkane)) +
+  geom_point()+
+  geom_line()
