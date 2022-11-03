@@ -10,15 +10,29 @@ ui <- fluidPage(
   titlePanel("Kovats Index Calculator"),
   sidebarLayout(
     sidebarPanel(
-      fileInput(inputId = "data.file", label = "upload XLS file", accept = ".xlsx")
+      fileInput(inputId = "datafile", label = "upload XLS file", accept = ".xlsx")
       
     ),
-    mainPanel("the results will go here")
+    mainPanel(
+      plotOutput("alkanes_plot")
+    )
   )
 )
 
 ##########
 # Server #
 ##########
-server <- function(input, output) {}
+
+server <- function(input, output) {
+
+  output$alkanes_plot <- 
+    renderPlot(
+    read.xlsx(input$datafile$datapath, sheet = 1) %>% 
+      ggplot(aes(x = carbons, y = RT_seconds)) + 
+      geom_line()+
+      geom_point()
+    )
+   
+  
+}
 shinyApp(ui = ui, server = server)
