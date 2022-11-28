@@ -71,12 +71,12 @@ server <- function(input, output) {
   output$download <- downloadHandler(
     
     filename = function() { 
-      paste("data-", Sys.Date(), ".csv", sep="")
+      paste("KI_calculation_Results", Sys.Date(), ".xlsx", sep="")
     },
     
     content = function(file) {
       
-      write.csv(apply(table_for_download(),2,as.character), file)
+      write.xlsx(apply(table_for_download(),2,as.character), file)
       
     })
 }
