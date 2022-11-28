@@ -10,6 +10,7 @@ ui <- fluidPage(
   titlePanel("Kovats Index Calculator"),
   sidebarLayout(
     sidebarPanel(
+      downloadButton("template_download", "Download Example Template"),
       fileInput(inputId = "datafile", label = "upload XLS file", accept = ".xlsx"),
       downloadButton("download", "Download Results")
       
@@ -86,5 +87,24 @@ server <- function(input, output) {
       write.xlsx(apply(table_processed_data(),2,as.character), file)
       
     })
+  #########################
+  # Download the template #
+  #########################
+  
+  output$template_download <- downloadHandler(
+    
+    filename = function() { 
+      paste("KI_upload_example.xlsx")
+    },
+    
+    content = function(file) {
+      
+      file.copy("KI_upload_template.xlsx", file)
+      
+    })
+  
 }
+
+
+
 shinyApp(ui = ui, server = server)
