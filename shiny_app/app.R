@@ -7,7 +7,7 @@ library(openxlsx)
 ###################
 
 ui <- fluidPage(
-  titlePanel("Kovats Index Calculator"),
+  titlePanel("Kovats Retention Index Calculator"),
   sidebarLayout(
     sidebarPanel(
       downloadButton("template_download", "Download Example Template"),
@@ -36,13 +36,19 @@ server <- function(input, output) {
     metabolites_of_interest <- read.xlsx(input$datafile$datapath, sheet = 2)   
   })
   # plot alkane series from upload
+  
+
   output$alkanes_plot <- 
-    renderPlot(
+    renderPlot({
+      validate(
+      need(input$datafile$datapath, "Upload your data first or download the (example) template")
+      )
       read.xlsx(input$datafile$datapath, sheet = 1) %>% 
       ggplot(aes(x = carbons, y = RT_seconds)) + 
       geom_line()+
       geom_point()
-    )
+    })
+  
    
   ############################
   # Function to calculate KI #
@@ -68,9 +74,12 @@ server <- function(input, output) {
   
   # Create the table to display on the screen
   output$compounds_with_KI <-
-    renderTable(
+    renderTable({
+        validate(
+          need(input$datafile$datapath, "")
+        )
       table_processed_data() 
-    )
+    })
   
   ###############################
   # Download the processed data #
@@ -94,7 +103,7 @@ server <- function(input, output) {
   output$template_download <- downloadHandler(
     
     filename = function() { 
-      paste("KI_upload_example.xlsx")
+      paste("KI_upload_example_template.xlsx")
     },
     
     content = function(file) {
@@ -102,7 +111,6 @@ server <- function(input, output) {
       file.copy("KI_upload_template.xlsx", file)
       
     })
-  
 }
 
 
