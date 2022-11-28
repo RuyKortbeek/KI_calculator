@@ -11,7 +11,7 @@ ui <- fluidPage(
   sidebarLayout(
     sidebarPanel(
       fileInput(inputId = "datafile", label = "upload XLS file", accept = ".xlsx"),
-      downloadButton("download", "Process the file & Download")
+      downloadButton("download", "Download Results")
       
     ),
     mainPanel(
@@ -57,26 +57,33 @@ server <- function(input, output) {
     return(KI)
   }
   
+  
+  # Calculate the KI 
+  table_processed_data <- reactive({  
+    metabolites_of_interest() %>% 
+      mutate(calculated_KI = lapply(RT_seconds, fun.KI))
+  })
+  
+  
+  # Create the table to display on the screen
   output$compounds_with_KI <-
     renderTable(
-      metabolites_of_interest() %>% 
-        mutate(calculated_KI = lapply(RT_seconds, fun.KI))
+      table_processed_data() 
     )
   
-  table_for_download <- reactive({  
-   metabolites_of_interest() %>% 
-    mutate(calculated_KI = lapply(RT_seconds, fun.KI))
-  })
+  ###############################
+  # Download the processed data #
+  ###############################
   
   output$download <- downloadHandler(
     
     filename = function() { 
-      paste("KI_calculation_Results", Sys.Date(), ".xlsx", sep="")
+      paste("KI_calculation_Results_", Sys.Date(), ".xlsx", sep="")
     },
     
     content = function(file) {
       
-      write.xlsx(apply(table_for_download(),2,as.character), file)
+      write.xlsx(apply(table_processed_data(),2,as.character), file)
       
     })
 }
