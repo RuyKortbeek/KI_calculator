@@ -10,7 +10,8 @@ ui <- fluidPage(
   titlePanel("Kovats Index Calculator"),
   sidebarLayout(
     sidebarPanel(
-      fileInput(inputId = "datafile", label = "upload XLS file", accept = ".xlsx")
+      fileInput(inputId = "datafile", label = "upload XLS file", accept = ".xlsx"),
+      downloadButton("download", "Process the file & Download")
       
     ),
     mainPanel(
@@ -61,6 +62,22 @@ server <- function(input, output) {
       metabolites_of_interest() %>% 
         mutate(calculated_KI = lapply(RT_seconds, fun.KI))
     )
+  
+  table_for_download <- reactive({  
+   metabolites_of_interest() %>% 
+    mutate(calculated_KI = lapply(RT_seconds, fun.KI))
+  })
+  
+  output$download <- downloadHandler(
     
+    filename = function() { 
+      paste("data-", Sys.Date(), ".csv", sep="")
+    },
+    
+    content = function(file) {
+      
+      write.csv(apply(table_for_download(),2,as.character), file)
+      
+    })
 }
 shinyApp(ui = ui, server = server)
