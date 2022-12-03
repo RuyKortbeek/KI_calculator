@@ -1,6 +1,7 @@
 library(shiny)
 library(tidyverse)
 library(openxlsx)
+library(httr)
 
 ###################
 # User interface  #
@@ -16,8 +17,18 @@ ui <- fluidPage(
       
     ),
     mainPanel(
-      plotOutput("alkanes_plot"),
-      tableOutput("compounds_with_KI")
+      fluidRow("test"),
+      fluidRow(
+        tabsetPanel(
+          tabPanel("Results", icon = icon("chart-line"),
+                   plotOutput("alkanes_plot"),
+                   tableOutput("compounds_with_KI")
+          ),
+          tabPanel("HELP / INFO ",icon = icon("question-circle")
+                   )
+          )
+      )
+      
     )
   )
 )
