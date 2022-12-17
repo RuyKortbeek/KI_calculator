@@ -24,8 +24,10 @@ ui <- fluidPage(
                    plotOutput("alkanes_plot"),
                    tableOutput("compounds_with_KI")
           ),
-          tabPanel("HELP / INFO ",icon = icon("question-circle")
-                   )
+          tabPanel("USER HELP",icon = icon("question-circle"),
+                   source("app_user_help.R")),
+          tabPanel("INFO KI / AI Index",icon = icon("info-circle"),
+                   course("KI_AI_info.R"))
           )
       )
       
