@@ -61,25 +61,41 @@ server <- function(input, output) {
     })
   
    
-  ############################
-  # Function to calculate KI #
-  ############################
+  ###################################
+  # Function to calculate KI and AI #
+  ###################################
   
   fun.KI <- function(my.rt){ 
     RT1 = alkanes() %>% filter(RT_seconds < my.rt) %>% tail(1) %>% .$RT_seconds
     RT2= alkanes() %>% filter(RT_seconds > my.rt) %>% head(1) %>% .$RT_seconds
     N = alkanes()  %>% filter(RT_seconds > my.rt) %>% head(1) %>% .$carbons
     
-    KI = round((100 * N)+100*((my.rt - RT1)/(RT2 - RT1)))
+    KI = round((100 * N) + 100*((log(my.rt) - log(RT1)) / (log(RT2) - log(RT1))))
     
     return(KI)
   }
   
   
-  # Calculate the KI 
+  fun.AI <- function(my.rt){ 
+    RT1 = alkanes() %>% filter(RT_seconds < my.rt) %>% tail(1) %>% .$RT_seconds
+    RT2= alkanes() %>% filter(RT_seconds > my.rt) %>% head(1) %>% .$RT_seconds
+    N = alkanes()  %>% filter(RT_seconds > my.rt) %>% head(1) %>% .$carbons
+    
+    AI = round((100 * N)+100*((my.rt - RT1)/(RT2 - RT1)))
+    
+    return(AI)
+  }
+  
+
+  
+  ######################################
+  # Make calculations on input dataset #
+  ######################################
+  
   table_processed_data <- reactive({  
     metabolites_of_interest() %>% 
-      mutate(calculated_KI = lapply(RT_seconds, fun.KI))
+      mutate(calculated_KI = lapply(RT_seconds, fun.KI),
+             calculated_AI = lapply(RT_seconds, fun.AI))
   })
   
   
