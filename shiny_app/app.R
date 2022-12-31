@@ -25,9 +25,9 @@ ui <- fluidPage(
                    tableOutput("compounds_with_KI")
           ),
           tabPanel("USER HELP",icon = icon("question-circle"),
-                   source("app_user_help.R")),
+                   includeHTML("user_help.html")),
           tabPanel("INFO KI / AI Index",icon = icon("info-circle"),
-                   source("KI_AI_info.R"))
+                   includeHTML("KI_AI_info.html"))
           )
       )
       
