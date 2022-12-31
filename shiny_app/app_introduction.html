@@ -1,0 +1,56 @@
+
+  <html>
+  
+  <head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Create two unequal columns that floats next to each other */
+.column {
+  float: left;
+  padding: 5px;
+}
+
+.left {
+  width: 80%;
+}
+
+.right {
+  width: 20%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+</head>
+<body>
+  
+<div class="row">
+<div class="column left">
+
+<h3>Calculate Retention Indices based on Alkane Series</h3>
+<p STYLE="text-align: justify;">
+  Upload the Excel template (left) containg your alkane series and your unknown metabolites of interest. 
+  The tool will show you the retention-time progression of your alkanes below. You can download the table 
+  of your compouds of interest with the calculated Kovats Retention Index (KI) and Arithmetic Retention Index (AI). <br />
+</p>
+<p> 
+<em>  Select the help/info tab below for more information </em>
+</p>
+</div>
+
+ <div class="column right">
+    <a href="https://github.com/RuyKortbeek/KI_calculator" target="_blank"> 
+         <img alt="Github Repository" target="_blank" width=80%; height=auto; opacity= 0.3 src="https://github.com/RuyKortbeek/ns_train_subscription_picker/blob/master/shiney_app/github_logo.png?raw=true"
+         ;>
+      </a>
+  </div>
+
+</html>

@@ -11,13 +11,13 @@ ui <- fluidPage(
   titlePanel("Kovats Retention Index Calculator"),
   sidebarLayout(
     sidebarPanel(
-      downloadButton("template_download", "Download Example Template"),
+      downloadButton("template_download", "Download (example) Template"),
       fileInput(inputId = "datafile", label = "upload XLS file", accept = ".xlsx"),
       downloadButton("download", "Download Results")
       
     ),
     mainPanel(
-      fluidRow("test"),
+      fluidRow(includeHTML("app_introduction.html")),
       fluidRow(
         tabsetPanel(
           tabPanel("Results", icon = icon("chart-line"),
