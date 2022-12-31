@@ -57,7 +57,7 @@ server <- function(input, output) {
       need(input$datafile$datapath, "Upload your data first or download the (example) template")
       )
       read.xlsx(input$datafile$datapath, sheet = 1) %>% 
-      ggplot(aes(x = carbons, y = RT_seconds)) + 
+      ggplot(aes(x = carbons, y = retention_time)) + 
       geom_line()+
       geom_point()
     })
@@ -68,9 +68,9 @@ server <- function(input, output) {
   ###################################
   
   fun.KI <- function(my.rt){ 
-    RT1 = alkanes() %>% filter(RT_seconds < my.rt) %>% tail(1) %>% .$RT_seconds
-    RT2= alkanes() %>% filter(RT_seconds > my.rt) %>% head(1) %>% .$RT_seconds
-    N = alkanes()  %>% filter(RT_seconds > my.rt) %>% head(1) %>% .$carbons
+    RT1 = alkanes() %>% filter(retention_time < my.rt) %>% tail(1) %>% .$retention_time
+    RT2= alkanes() %>% filter(retention_time > my.rt) %>% head(1) %>% .$retention_time
+    N = alkanes()  %>% filter(retention_time > my.rt) %>% head(1) %>% .$carbons
     
     KI = round((100 * N) + 100*((log(my.rt) - log(RT1)) / (log(RT2) - log(RT1))))
     
@@ -79,9 +79,9 @@ server <- function(input, output) {
   
   
   fun.AI <- function(my.rt){ 
-    RT1 = alkanes() %>% filter(RT_seconds < my.rt) %>% tail(1) %>% .$RT_seconds
-    RT2= alkanes() %>% filter(RT_seconds > my.rt) %>% head(1) %>% .$RT_seconds
-    N = alkanes()  %>% filter(RT_seconds > my.rt) %>% head(1) %>% .$carbons
+    RT1 = alkanes() %>% filter(retention_time < my.rt) %>% tail(1) %>% .$retention_time
+    RT2= alkanes() %>% filter(retention_time > my.rt) %>% head(1) %>% .$retention_time
+    N = alkanes()  %>% filter(retention_time > my.rt) %>% head(1) %>% .$carbons
     
     AI = round((100 * N)+100*((my.rt - RT1)/(RT2 - RT1)))
     
@@ -96,8 +96,8 @@ server <- function(input, output) {
   
   table_processed_data <- reactive({  
     metabolites_of_interest() %>% 
-      mutate(calculated_KI = lapply(RT_seconds, fun.KI),
-             calculated_AI = lapply(RT_seconds, fun.AI))
+      mutate(calculated_KI = lapply(retention_time, fun.KI),
+             calculated_AI = lapply(retention_time, fun.AI))
   })
   
   
