@@ -2,6 +2,7 @@ library(shiny)
 library(tidyverse)
 library(openxlsx)
 library(httr)
+library(ggrepel)
 
 ###################
 # User interface  #
@@ -59,7 +60,8 @@ server <- function(input, output) {
       read.xlsx(input$datafile$datapath, sheet = 1) %>% 
       ggplot(aes(x = carbons, y = retention_time)) + 
       geom_line()+
-      geom_point()
+      geom_point()+
+      scale_x_continuous(breaks = seq(0, 40, by = 1))
     })
   
    
