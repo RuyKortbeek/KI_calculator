@@ -13,8 +13,8 @@ c11 <- 1085.8, # n-undecane
 c12 <- 1254.4, # n-docecane
 c13 <- 1411.7, # n-tridecane
 c14 <- 1535.6, # n-tetradecane
-c15 <- 1633.1, # n-pentadecane
-c16 <- 1715.8, #n-hexadecane
+c15 <- 1633.1, # n-pentadecan
+c16 <- 1715.8, #n-hexadecanee
 c17 <- 1788.8, #n-heptadecane
 c18 <- 1855,  # n-octadecane
 c19 <- 1916.8 # n-nonadecane
@@ -22,10 +22,15 @@ c19 <- 1916.8 # n-nonadecane
 carbons = c(8:19)
 )
 
+
 # Plot retention time progression of the alkane series
-ggplot(alkanes,aes(x = carbons,  y = RT))+
+alkanes %>% 
+  slice(c(1:4, 8:19)) %>% 
+ggplot(aes(x = carbons,  y = RT))+
   geom_point()+
-  geom_line()
+  geom_line()+
+  ylab("retention_time")+
+  scale_x_continuous(breaks = seq(0, 40, by = 1))
 
 
 ###########################################################
