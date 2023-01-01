@@ -13,7 +13,9 @@ ui <- fluidPage(
   sidebarLayout(
     sidebarPanel(
       downloadButton("template_download", "Download (example) Template"),
-      fileInput(inputId = "datafile", label = "upload XLS file", accept = ".xlsx"),
+      hr(),
+      fileInput(inputId = "datafile", label = "Upload template", accept = ".xlsx"),
+      hr(),
       downloadButton("download", "Download Results")
       
     ),
@@ -61,7 +63,8 @@ server <- function(input, output) {
       ggplot(aes(x = carbons, y = retention_time)) + 
       geom_line()+
       geom_point()+
-      scale_x_continuous(breaks = seq(0, 40, by = 1))
+      scale_x_continuous(breaks = seq(0, 40, by = 1))+
+      ggtitle("Uploaded alkane series")
     })
   
    
