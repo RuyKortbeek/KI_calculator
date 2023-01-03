@@ -14,7 +14,7 @@ ui <- fluidPage(
     sidebarPanel(
       downloadButton("template_download", "Download (example) Template"),
       hr(),
-      fileInput(inputId = "datafile", label = "Upload template", accept = ".xlsx"),
+      fileInput(inputId = "datafile", label = "Upload your data", accept = ".xlsx"),
       hr(),
       downloadButton("download", "Download Results")
       

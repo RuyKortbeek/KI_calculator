@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html>
+<body>
   <head>
     <title>How to use this tool</title>
   </head>
-  <body>
+ 
     <h4>To calculate the retention indices of your compounds, go through following steps:</h4>
    
-    <ul>
+    <ol>
       <li>Download the data-upload Template</li>
       <li>Fill in the retention time of your alkane standards </li>
       <li>Fill in the retention time of your compounds of interest </li>
       <li>Upload the template containing your data </li>
       <li>Check the plot showing your alkane series for irregularities</li>
       <li>Download your data containing the results</li>
-    </ul>
+    </ol>
     <h3>Step 1: Download the data-upload template</h3>
-    <p>If you're using this tool for the fist time, download the upload template. This Excel file contains two tabs to upload your data, explained below. The template already contains some example data. You can remove these and enter your own. 
+    <p>If you're using this tool for the fist time, start downloading upload-template. This Excel file contains two tabs in which you enter and upload your data, explained below. The template already contains some example data. You can remove these and enter your own. 
+    <br></br>
     <i> NOTE: This tool may occasionally be updated. If the template is not working properly anymore, please download again. </i>
     </p>
     
@@ -29,15 +31,15 @@
       NOTE: The retention time of your compounds must be within the range of the retention times of your alkane series.</p>
       <img src= "https://github.com/RuyKortbeek/KI_calculator/blob/main/shiny_app/images/upload_example_tab2.jpg?raw=true">
       
-  <h3>Step 3: Upload the template containing your data </h3>
-  <p>Save the filled Excel template on your computer (".xlsx") and upload the file by clicking the "Browse..." button. After data-upload, the results will automaticly be displayed in the <b>Results</b> window of this tool </p>
+  <h3>Step 4: Upload the template containing your data </h3>
+  <p>Save the filled Excel template on your computer (".xlsx") and upload the file by clicking the <i> "Browse..." </i> button. After data-upload, the results will automatically be displayed in the <b>Results</b> window of this tool </p>
   
-  <h3>Step 4: Check the alkane series for irregularities</h3>
+  <h3>Step 5: Check the alkane series for irregularities</h3>
    <p>Before jumping to the results, take a moment to examine the plot of retention times for your alkanes. The line should be smooth when using a constant ramping temperature (see below). If there are any irregularities, it is possible that you made a mistake, such as accidentally switching or skipping an alkane. Be sure to double-check the file you uploaded, or refer back to the chromatogram of your alkane series if necessary. </p>
     <img src= "https://github.com/RuyKortbeek/KI_calculator/blob/main/shiny_app/images/chrom_examples.png?raw=true" width="400">
 
-    <h3>Step 5: Download the results </h3>
-   <p>After dataupload, a preview of the results will be shown in a table below the plot of the alkane series. This tool will provide your compounds of interest with the Kovats Retention Index (KI) using the formula of Kovats (1965) and the Arithmetic Index (AI) as proposed by Van den Dool and Kratz (1963). The KI is suitable for use when the temperature of the column stays constant. However, as noted by Van den Dool and Kratz (1963), when temperature-ramping is used on the column, the Arithmetic Index (AI) is more appropriate.
+    <h3>Step 6: Download the results </h3>
+   <p>After uploading your data, you will see a preview of the results in a table below the plot of the alkane series. This tool will calculate the Kovats Retention Index (KI) and the Arithmetic Index (AI) for your compounds of interest. The KI is calculated using the formula proposed by Kovats (1965) and is suitable for use when the temperature of the GC-column is constant. However, as noted by Van den Dool and Kratz (1963), when temperature-ramping is used on the GC-column, the AI is a more appropriate choice. For more details; see the KI / AI INFO window.
    <br></br>
    Click the <b>"Download Results"</b> button to download the results table as an Excel file.
    </p>
