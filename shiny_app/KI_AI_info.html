@@ -4,20 +4,47 @@
     <title>KI/AI info</title>
   </head>
   <body>
-    <h3>Kovats Retention index (KI)/h3>
-    <p>The Kovats Retention Index (KI) is a measure of the retention of a compound on a chromatography column. It is calculated using the formula proposed by Kovats(1965) and is based on the retention times of a set of reference compounds. Here, we use alkanes as a reference. 
+    <h3>Kovats Retention index (KI)</h3>
+    <p>The Kovats Retention Index (KI) is a measure for the retention of a compound on a chromatography column. This can be calculated using the formula proposed by Kovats (1965) and is based on the retention times of a reference compounds. Here, we use a series of alkanes as a reference. 
     <br></br> 
-    The KI is calculated as followed:
-    <img src= "https://github.com/RuyKortbeek/KI_calculator/blob/main/shiny_app/images/KI_image.jpg?raw=true" width="150">
-   
+    In this tool, the KI is calculated similarly as done by Adams (2007):
     </p>
+    <img src= "https://github.com/RuyKortbeek/KI_calculator/blob/main/shiny_app/images/KI_image.jpg?raw=true" width="300">
+   <p>
+    With:
     <ul>
-      <li>Home</li>
-      <li>About</li>
-      <li>Contact</li>
+      <li>RT(x) retention time of the compound of interest </li>
+      <li>RT(P<sub>z</sub>) retention time of the alkane before RT(x) </li>
+      <li>RT(P<sub>z+1</sub>) retention time of the alkane after RT(x) </li>
+      <li>P<sub>z</sub> number of carbons of the alkane before RT(x) </li>
     </ul>
-    <h2>About Me</h2>
-    <p>I'm a web developer and designer. I love creating beautiful and functional websites for people to use and enjoy.</p>
-    <p>If you have any questions or want to work with me, please don't hesitate to <a href="/contact">contact me</a>.</p>
+     </p>
+     
+    <h3>Arithmetic Index (AI)</h3>
+    <p>The Arithmetic Index (AI) was proposed by Van den Dool and Kratz (1963) as a more suitable measure when the chromatography column undergoes temperature changes. When using CG-MS with an increasing column temperature ('ramping') it's advised to use the AI instead of the KI.  
+    <br></br> 
+    In this tool, the AI is calculated similarly as done by Adams (2007):
+    </p>
+    <img src= "https://github.com/RuyKortbeek/KI_calculator/blob/main/shiny_app/images/AI_image.jpg?raw=true" width="250">
+   <p>
+    With:
+    <ul>
+      <li>RT(x) retention time of the compound of interest </li>
+      <li>RT(P<sub>z</sub>) retention time of the alkane before RT(x) </li>
+      <li>RT(P<sub>z+1</sub>) retention time of the alkane after RT(x) </li>
+      <li>P<sub>z</sub> number of carbons of the alkane before RT(x) </li>
+    </ul>
+     </p>
+     
+    <h3>Literature</h3>
+    <ul>
+      
+      <li><a href="https://diabloanalytical.com/ms-software/essentialoilcomponentsbygcms/request-for-e-book-essential-oil-components-by-gc-ms/">Here you can get a free copy of the Adams (2007) library (PDF book) </a></li>
+      
+      <li><i>Kovats, E. (1965) Gas Chromatographic Characterization of Organic Substances in the Retention Index System. Advances in Chromatography, 1, 229-247.</i></li>
+     
+      <li><i>van Den Dool, H., & Kratz, P. D. (1963). A generalization of the retention index system including linear temperature programmed gas—liquid partition chromatography. Journal of Chromatography A, 11, 463-471.</i>
+  </ul>
+    
   </body>
 </html>
