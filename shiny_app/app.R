@@ -9,7 +9,7 @@ library(ggrepel)
 ###################
 
 ui <- fluidPage(
-  titlePanel("Kovats Retention Index Calculator"),
+  titlePanel("GC-MS Retention Index Calculator"),
   sidebarLayout(
     sidebarPanel(
       downloadButton("template_download", "Download (example) Template"),
